@@ -7,23 +7,29 @@ class InputDecorations {
     required Icon icon,
   }) {
     return InputDecoration(
-      enabledBorder: UnderlineInputBorder(
+      contentPadding:
+          const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
         borderSide: BorderSide(color: Colors.green.shade900),
       ),
-      focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.green.shade900,
-        ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(color: Colors.grey),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.0),
+        borderSide: const BorderSide(color: Colors.grey),
       ),
       hintText: hintext,
       labelText: labeltext,
-      labelStyle: TextStyle(
+      labelStyle: const TextStyle(
         fontWeight: FontWeight.normal,
-        color: Colors.green.shade900,
+        color: Colors.grey,
       ),
       prefixIcon: Icon(
         icon.icon,
-        color: Colors.green.shade700,
+        color: Colors.grey,
       ),
       hintStyle: TextStyle(
         color: Colors.grey[400],

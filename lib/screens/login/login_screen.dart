@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Form(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -71,13 +71,13 @@ class LoginScreen extends StatelessWidget {
                           validator: (value) {
                             if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                                 .hasMatch(value!)) {
-                              return 'Por favor, ingresa un correo electrónico válido';
+                              return 'Ingresa un correo electrónico válido';
                             }
                             return null;
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         TextFormField(
                           autocorrect: false,
@@ -89,17 +89,17 @@ class LoginScreen extends StatelessWidget {
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Por favor, ingresa tu contraseña';
+                              return 'Ingresa tu contraseña';
                             }
                             if (value.length < 8) {
-                              return 'La contraseña debe tener al menos 8 caracteres';
+                              return 'Debe tener al menos 8 caracteres';
                             }
                             // Puedes agregar más criterios de validación según tus necesidades
                             return null; // Retorna null si la validación pasa
                           },
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: 20,
                         ),
                         MaterialButton(
                           shape: RoundedRectangleBorder(
@@ -128,7 +128,7 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 50,
+            height: 100,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
