@@ -8,7 +8,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green.shade900,
+        backgroundColor: Colors.green.shade800,
         title: const Text(
           'Registrar cuenta',
           style: TextStyle(

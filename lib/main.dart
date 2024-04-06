@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Moo App',
       routes: {
         'login': (_) => const LoginScreen(),
-        'home': (_) => const HomeScren(),
+        'home': (_) => const HomeScreen(),
         'register': (_) => const RegisterScreen()
       },
       initialRoute: 'login',
