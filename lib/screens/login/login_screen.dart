@@ -48,11 +48,13 @@ class LoginScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  "Bienvenido",
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  "¡Bienvenido!",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
                 Form(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -75,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                           },
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         TextFormField(
                           autocorrect: false,
@@ -128,20 +130,27 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
+              const Center(
                 child: Text(
                   "No tienes cuenta? ",
                   style: TextStyle(color: Colors.white70),
                 ),
               ),
               Center(
-                child: Text(
-                  "Regístrate",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, 'register');
+                  },
+                  child: const Text(
+                    "Regístrate",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -156,15 +165,16 @@ class LoginScreen extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(top: 30),
         width: double.infinity,
-        child: const Column(
+        child: Column(
           children: [
-            Icon(
-              Icons.person_pin,
-              color: Colors.white,
-              size: 100,
+            Image.asset(
+              'assets/icon.png', // Reemplaza 'nombre_de_la_imagen.png' con el nombre de tu imagen PNG
+              width: 100, // Ancho de la imagen
+              height: 100, // Alto de la imagen
+              fit: BoxFit.contain,
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               "Moo App",
               style: TextStyle(
                 fontSize: 24,
@@ -172,9 +182,9 @@ class LoginScreen extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(height: 5),
-            Text(
-              "Gestiona tu agricultura con facilidad",
+            const SizedBox(height: 5),
+            const Text(
+              "Administra tu agricultura con facilidad.",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.white,
