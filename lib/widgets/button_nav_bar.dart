@@ -19,37 +19,136 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      unselectedItemColor:
-          Colors.grey, // Color gris para los íconos no seleccionados
-      selectedItemColor:
-          Colors.green.shade900, // Color verde para el ícono seleccionado
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Inicio',
+    final ThemeData theme = Theme.of(context);
+    
+    return Scaffold(
+      
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        indicatorColor: Colors.green.shade900,
+        selectedIndex: _selectedIndex,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.local_florist),
+            icon: Icon(Icons.local_florist_outlined),
+            label: 'Granjas',
+          ),
+          NavigationDestination(
+            
+            selectedIcon: Icon(Icons.settings),
+            icon: Icon(Icons.settings_outlined),
+            label: 'Ajustes',
+          ),
+          NavigationDestination(
+            
+            selectedIcon: Icon(Icons.person),
+            icon: Icon(Icons.person_outlined),
+            label: 'Perfil',
+          ),
+        ],
+      ),
+      body: <Widget>[
+        /// Home page
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Home page',
+                style: theme.textTheme.titleLarge,
+              ),
+            ),
+          ),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.local_florist),
-          label: 'Granjas',
+
+        /// Notifications page
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.notifications_sharp),
+                  title: Text('Notification 1'),
+                  subtitle: Text('This is a notification'),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.notifications_sharp),
+                  title: Text('Notification 2'),
+                  subtitle: Text('This is a notification'),
+                ),
+              ),
+            ],
+          ),
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Ajustes',
+
+        /// Messages page
+        ListView.builder(
+          reverse: true,
+          itemCount: 2,
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) {
+              return Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  margin: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primary,
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: Text(
+                    'Hello',
+                    style: theme.textTheme.bodyLarge!
+                        .copyWith(color: theme.colorScheme.onPrimary),
+                  ),
+                ),
+              );
+            }
+            return Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primary,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                child: Text(
+                  'Hi!',
+                  style: theme.textTheme.bodyLarge!
+                      .copyWith(color: theme.colorScheme.onPrimary),
+                ),
+              ),
+            );
+          },
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Perfil',
+        Card(
+          shadowColor: Colors.transparent,
+          margin: const EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Perfil page',
+                style: theme.textTheme.titleLarge,
+              ),
+            ),
+          ),
         ),
-      ],
-      currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
-      selectedLabelStyle: TextStyle(
-          color: Colors
-              .green.shade900), // Estilo de texto para etiquetas seleccionadas
-      unselectedLabelStyle: const TextStyle(
-          color:
-              Colors.grey), // Estilo de texto para etiquetas no seleccionadas
+      ][_selectedIndex],
     );
+      
   }
 }
