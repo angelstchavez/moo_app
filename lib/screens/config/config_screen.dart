@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ConfigScreen extends StatelessWidget {
-  const ConfigScreen({super.key});
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ajustes'),
+      ),
+      body: const Center(
+        child: Text('Contenido del Ajuste'),
+      ),
+    );
   }
 }

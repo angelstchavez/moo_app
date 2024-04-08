@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:moo_app/screens/config/config_screen.dart';
+import 'package:moo_app/screens/farm/farm_screen.dart';
+import 'package:moo_app/screens/home/home_screen.dart';
+import 'package:moo_app/screens/profile/profile_screen.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
   const BottomNavBarWidget({super.key});
@@ -6,149 +12,83 @@ class BottomNavBarWidget extends StatefulWidget {
   @override
   State<BottomNavBarWidget> createState() => _BottomNavBarWidgetState();
 }
+const TextStyle _textStyle = TextStyle(
+
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.bold,
+  fontSize: 15,
+  
+);
 
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    // Aquí puedes agregar lógica adicional según el índice seleccionado
-  }
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    //final colors = Theme.of(context).colorScheme;
+    final screens =[const HomeScreen(), const FarmScreen(),const ProfileScreen(),const SettingScreen()];
     
+
     return Scaffold(
       
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index) {
+      body: IndexedStack(
+        index: selectedIndex,
+        children: screens,
+      ),
+    
+      bottomNavigationBar: BottomNavigationBar(
+        
+
+        type: BottomNavigationBarType.shifting,
+        currentIndex: selectedIndex,
+        onTap: (value) {
+          
           setState(() {
-            _selectedIndex = index;
+            selectedIndex = value;
           });
         },
-        indicatorColor: Colors.green.shade900,
-        selectedIndex: _selectedIndex,
-        destinations: const <Widget>[
-          NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
+        elevation: 0,
+        selectedLabelStyle: _textStyle,
+        backgroundColor: Colors.green.shade800,
+        items: [
+          
+           BottomNavigationBarItem(
+            icon:  const Icon(Icons.home_outlined),
+            activeIcon:  const Icon(Icons.home),
             label: 'Home',
+            backgroundColor: Colors.green.shade100,
           ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.local_florist),
-            icon: Icon(Icons.local_florist_outlined),
+           BottomNavigationBarItem(
+            icon:  const Icon(
+              Icons.local_florist_outlined,
+            ),
+            activeIcon:  const Icon(Icons.local_florist_rounded),
             label: 'Granjas',
+            backgroundColor: Colors.green.shade200,
           ),
-          NavigationDestination(
-            
-            selectedIcon: Icon(Icons.settings),
-            icon: Icon(Icons.settings_outlined),
-            label: 'Ajustes',
-          ),
-          NavigationDestination(
-            
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outlined),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.person_3_outlined,
+            ),
+            activeIcon: const Icon(Icons.person_3_rounded),
             label: 'Perfil',
+             backgroundColor: Colors.green.shade100,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(
+              Icons.settings_outlined,
+            ),
+            activeIcon: const Icon(Icons.settings_rounded),
+            label: 'Ajustes',
+            backgroundColor: Colors.green.shade200,
           ),
         ],
+        selectedItemColor: Colors.green.shade900, // Cambia el color del ícono y del texto del label para el item seleccionado
+        unselectedItemColor: Colors.grey, // Cambia el color del ícono y del texto del label para los items no seleccionados
+        showSelectedLabels:true, // Muestra los labels de los ítems seleccionados
+        showUnselectedLabels:true, 
+        
       ),
-      body: <Widget>[
-        /// Home page
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Home page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
-        ),
-
-        /// Notifications page
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 1'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 2'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-            ],
-          ),
-        ),
-
-        /// Messages page
-        ListView.builder(
-          reverse: true,
-          itemCount: 2,
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  margin: const EdgeInsets.all(8.0),
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Text(
-                    'Hello',
-                    style: theme.textTheme.bodyLarge!
-                        .copyWith(color: theme.colorScheme.onPrimary),
-                  ),
-                ),
-              );
-            }
-            return Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                margin: const EdgeInsets.all(8.0),
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Text(
-                  'Hi!',
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: theme.colorScheme.onPrimary),
-                ),
-              ),
-            );
-          },
-        ),
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Perfil page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
-        ),
-      ][_selectedIndex],
     );
-      
   }
 }
